@@ -5,10 +5,12 @@ from .form import PatientSignUpForm, DoctorSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout,authenticate
 from .models import User
+from blog.models import BlogPost
 # Create your views here.
 
 def index(request):
-    return render(request, '../templates/home.html')
+    blog_posts = BlogPost.objects.filter()
+    return render(request, '../templates/home.html', {'blog_posts':blog_posts})
 
 def register(request):
     return render(request, '../templates/register.html')

@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+
 <div class="container">
     <div class="row">
         <!-- For Header -->
@@ -39,12 +40,37 @@
                         <li class="list-group-item">{{ request.user.city }}</li>
                         <li class="list-group-item">{{ request.user.state }}</li>
                         <li class="list-group-item">{{ request.user.pincode }}</li>                        
-                      </ul>
+                    </ul>
+                    <hr>
+                    {% if request.user.is_doctor %}
+                    <a class="btn btn-warning mr-1 mt-2" href="{% url 'blog:create_post' %}">Create Blog</a>
+                    {% endif %}
+                </div>
+                <div class="col-lg-8">
+                    <b class="text-secondary">Blogs</b><br>
+                    {% if blog_posts %}
+                    <div class="card bg-white mt-2 mb-5">
+                        <div class="card-body">
+                            <div class="list-group">
+                                {% for post in blog_posts %}
+                                    <a href="{% url 'blog:detail_post' %}" class="list-group-item list-group-item-action flex-column align-items-start bg-warning text-black">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{post.title}}</h5>
+                                            <small>{{ post.date_published }}</small>
+                                        </div>
+                                        <p class="mb-1">{{post.content|safe|truncatechars:120}}</p>
+                                    </a>
+                                    <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                        <p>You Have no Post Create a post <a href="{% url 'blog:create_post' %}">here</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
-
-        
         {% endif %}
 
     </div>

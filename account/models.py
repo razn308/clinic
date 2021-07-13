@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     is_patient = models.BooleanField(default=False)
-    iis_doctor = models.BooleanField(default=False)
+    is_doctor = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     profile = models.ImageField(null=True, blank=True, upload_to = "images/" ) 
