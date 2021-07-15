@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load bootstrap4 %}
 {% block title %}Create Blog{% endblock title %}
 
 {% block content %}
@@ -16,22 +16,21 @@
             max-width: 200px;
         }
   </style>
-
-{% if request.user.is_authenticated %}
-
+  
   <div class="container">
       <div class="row">
           <div class="col-lg-7 offset-lg-1">
-            <form class="create-form"  method="POST" enctype="multipart/form-data">{% csrf_token %}
+              <form class="create-form"  method="POST" enctype="multipart/form-data">{% csrf_token %}
   
-                {{ form }}  
+                <!-- {{ form }}    -->
+                {% bootstrap_form form %}
   
                 <!-- Submit btn -->
                 <button class="submit-button btn btn-lg btn-warning btn-block" type="submit">POST</button>
-            </form>	
+              </form>	
           </div>
       </div>
   </div>
   
-{% endif %}
-{% endblock content %}
+
+{% endblock %}

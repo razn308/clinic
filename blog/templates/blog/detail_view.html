@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}Account{% endblock title %}
+
 {% block content %}
-
-{% if request.user.is_authenticated %}
-
 
 <div class="container">
     <div class="row">
@@ -15,7 +14,7 @@
                 <div class="card-body">
                     <img class="card-img-top" src="{{blog_post.image.url}}" alt="Blog Image">
                     <h2 class="card-title">{{blog_post.title}}</h2>
-                    <p class="card-text">{{blog_post.content|safe}}</p>
+                    <p class="card-text">{{blog_post.body|safe}}</p>
                     <div class="card-footer text-muted">
                         {{blog_post.date_published}} by {{blog_post.author}}
                     </div>
@@ -25,6 +24,6 @@
         <!-- End CARDS -->
     </div>
 </div>
-{% endif %}
+
 {% endblock %}
 

@@ -5,5 +5,5 @@ class CreateBlogPostForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ('title', 'image', 'content', 'category')
+        fields = ('title','summery', 'body','category', 'status','image')
         exclude = []

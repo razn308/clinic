@@ -6,10 +6,19 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout,authenticate
 from .models import User
 from blog.models import BlogPost
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    blog_posts = BlogPost.objects.filter()
+    if request.user.is_anonymous:
+        blog_posts = None
+    elif request.user.is_doctor:
+        blog_posts = BlogPost.objects.filter()
+    else:
+        request.user.is_patient
+        blog_posts = BlogPost.objects.filter(status=1)
+    # blog_posts = BlogPost.objects.filter()
+
     return render(request, '../templates/home.html', {'blog_posts':blog_posts})
 
 def register(request):
@@ -53,6 +62,7 @@ def login_request(request):
     return render(request, '../templates/sign_in.html',
     context={'form':AuthenticationForm()})
 
+@login_required
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('index')
