@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.shortcuts import render, redirect
 from .form import PatientSignUpForm, DoctorSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -20,6 +20,10 @@ def index(request):
     # blog_posts = BlogPost.objects.filter()
 
     return render(request, '../templates/home.html', {'blog_posts':blog_posts})
+
+def AllDoctor(request):
+    all_doctors = User.objects.all()
+    return render(request, '../templates/doctor_list.html', {'all_doctors': all_doctors} )
 
 def register(request):
     return render(request, '../templates/register.html')
