@@ -53,14 +53,27 @@
                         <div class="card-body">
                             <div class="list-group">
                                 {% for post in blog_posts %}
-                                    <a href="{% url 'blog:detail_post' post.slug %}" class="list-group-item list-group-item-action flex-column align-items-start bg-warning text-black">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{{post.title}}</h5>
-                                            <small>{{ post.date_published }}</small>
-                                        </div>
-                                        <p class="mb-1">{{post.summery|safe|truncatechars:120}}</p>
-                                    </a>
-                                    <hr>
+                                    {% if request.user.is_doctor %}
+                                        {% if post.author == request.user %}
+                                            <a href="{% url 'blog:detail_post' post.slug %}" class="list-group-item list-group-item-action flex-column align-items-start bg-warning text-black">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">{{post.title}}</h5>
+                                                    <small>{{ post.date_published }}</small>
+                                                </div>
+                                                <p class="mb-1">{{post.summery|safe|truncatechars:120}}</p>
+                                            </a>
+                                            <hr>
+                                        {% endif %}
+                                    {% else %}
+                                        <a href="{% url 'blog:detail_post' post.slug %}" class="list-group-item list-group-item-action flex-column align-items-start bg-warning text-black">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">{{post.title}}</h5>
+                                                <small>{{ post.date_published }}</small>
+                                            </div>
+                                            <p class="mb-1">{{post.summery|safe|truncatechars:120}}</p>
+                                        </a>
+                                        <hr>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
