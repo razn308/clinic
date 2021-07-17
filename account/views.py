@@ -17,13 +17,13 @@ def index(request):
     else:
         request.user.is_patient
         blog_posts = BlogPost.objects.filter(status=1)
-    # blog_posts = BlogPost.objects.filter()
-
     return render(request, '../templates/home.html', {'blog_posts':blog_posts})
 
-def AllDoctor(request):
-    all_doctors = User.objects.all()
-    return render(request, '../templates/doctor_list.html', {'all_doctors': all_doctors} )
+class AllDoctorListView(ListView):
+    model = User
+    template_name = '../templates/doctor_list.html'
+    context_object_name = 'all_doctors'
+
 
 def register(request):
     return render(request, '../templates/register.html')

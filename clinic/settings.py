@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'account',
     'blog',
+    'appointment',
 ]
 
 AUTH_USER_MODEL = 'account.User'

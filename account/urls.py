@@ -3,7 +3,7 @@ from .import  views
 
 urlpatterns=[
     path('',views.index, name='index'),
-    path('account/all_doctor',views.AllDoctor, name='all_doctor'),
+    path('account/doctor_list',views.AllDoctorListView.as_view(), name='doctor_list'),
     path('accounts/register/',views.register, name='register'),
     path('accounts/patient_register/',views.patient_register.as_view(), name='patient_register'),
     path('accounts/doctor_register/',views.doctor_register.as_view(), name='doctor_register'),
